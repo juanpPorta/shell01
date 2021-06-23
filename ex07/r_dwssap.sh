@@ -1,3 +1,1 @@
-export FT_LINE1=7
-export FT_LINEE=15
-cat /etc/passwd | grep -v '#' | awk 'NR%2==0' | sed 's/:\(.*\)//' | rev | sort -r | awk -v lb="$FT_LINE1" -v lt="$FT_LINE2" 'NR>=lb && NR<=lt' | awk '{print}' ORS=', ' | sed "s/\, $/./"
+cat /etc/passwd | grep -v '^#' | sed -n 'n;p' | cut -d ':' -f 1| rev | sort -r | awk 'NR >= ENVIRON["FT_LINE1"] && NR <= ENVIRON["FT_LINE2"]' | sed 's/$/,/g' | tr '\n' ' ' | sed 's/, $/./' | tr -d '\n'

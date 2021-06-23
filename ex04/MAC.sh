@@ -1,1 +1,1 @@
-ifconfig -a link | grep ether | sed "s/ether //"
+ifconfig | grep 'ether' | cut -c 8-24 | grep -v  autoselect
